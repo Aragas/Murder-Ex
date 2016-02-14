@@ -1,71 +1,54 @@
-if ( SERVER ) then
-	AddCSLuaFile( "shared.lua" )
-else
-	killicon.AddFont( "weapon_mu_magnum", "HL2MPTypeDeath", "1", Color( 255, 0, 0 ) )
-end
-SWEP.Base 			= "weapon_base"
+SWEP.Base = "weapon_base"
+SWEP.ViewModel				= "models/weapons/v_357.mdl"
+SWEP.WorldModel				= "models/weapons/w_357.mdl"
 
-SWEP.PrintName		= translate and translate.magnum or "Magnum"
-SWEP.Slot			= 2
-SWEP.SlotPos		= 1
-SWEP.DrawAmmo		= true
-SWEP.DrawCrosshair	= true
-SWEP.ViewModelFlip	= false
-SWEP.ViewModelFOV	= 50
-SWEP.ViewModel		= "models/weapons/v_357.mdl"
-SWEP.WorldModel		= "models/weapons/w_357.mdl"
-SWEP.HoldType		= "pistol"
+SWEP.PrintName 				=  translate and translate.magnum or "Magnum"
 
-SWEP.Weight			= 5
-SWEP.AutoSwitchTo	= false
-SWEP.AutoSwitchFrom	= false
-SWEP.Spawnable		= true
-SWEP.AdminOnly		= true
+SWEP.Weight	= 0
 
-SWEP.Author			= "Mechanical Mind"
-SWEP.Contact		= ""
-SWEP.Purpose		= "The icecream"
-SWEP.Instructions	= "Magnum"
+SWEP.Spawnable				= true
+SWEP.AdminOnly				= true
 
-SWEP.Primary.Sound				= "Weapon_357.Single"
-SWEP.Primary.Damage				= 120
-SWEP.Primary.NumShots			= 1
-SWEP.Primary.Recoil				= 5
-SWEP.Primary.Cone				= 1
-SWEP.Primary.Delay				= 3
-SWEP.Primary.ClipSize			= -1
-SWEP.Primary.DefaultClip		= -1
-SWEP.Primary.Tracer				= 1
-SWEP.Primary.Force				= 420
-SWEP.Primary.TakeAmmoPerBullet	= false
-SWEP.Primary.Automatic			= false
-SWEP.Primary.Ammo				= "none"
-SWEP.Primary.ReloadTime = 3.7
-SWEP.ReloadFinishedSound		= Sound("Weapon_Crossbow.BoltElectrify")
-SWEP.ReloadSound = Sound("Weapon_357.Reload")
+SWEP.AutoSwitchTo			= false
+SWEP.AutoSwitchFrom			= false
+SWEP.DrawAmmo				= true
+SWEP.DrawCrosshair			= true
+SWEP.ViewModelFlip			= false
 
-SWEP.Secondary.Sound				= ""
-SWEP.Secondary.Damage				= 10
-SWEP.Secondary.NumShots				= 1
-SWEP.Secondary.Recoil				= 1
-SWEP.Secondary.Cone					= 0
-SWEP.Secondary.Delay				= 0.25
-SWEP.Secondary.ClipSize				= -1
-SWEP.Secondary.DefaultClip			= -1
-SWEP.Secondary.Tracer				= -1
-SWEP.Secondary.Force				= 5
-SWEP.Secondary.TakeAmmoPerBullet	= false
-SWEP.Secondary.Automatic			= false
-SWEP.Secondary.Ammo					= "none"
+SWEP.Primary.Delay			= 3
+SWEP.Primary.Recoil			= 5
+SWEP.Primary.Damage			= 120
+SWEP.Primary.NumShots		= 1	
+SWEP.Primary.Cone			= 1
+SWEP.Primary.ClipSize		= -1
+SWEP.Primary.Force			= 420
+SWEP.Primary.DefaultClip	= -1
+SWEP.Primary.Automatic   	= false
+SWEP.Primary.Ammo         	= "none"
+SWEP.Primary.Sound			= "Weapon_357.Single"
+SWEP.Primary.Tracer			= 1
+SWEP.Primary.ReloadTime 	= 3.7
+SWEP.ReloadFinishedSound	= Sound("Weapon_Crossbow.BoltElectrify")
+SWEP.ReloadSound 			= Sound("Weapon_357.Reload")
+
+SWEP.Secondary.Delay		= 0.9
+SWEP.Secondary.Recoil		= 0
+SWEP.Secondary.Damage		= 0
+SWEP.Secondary.NumShots		= 1
+SWEP.Secondary.Cone			= 0
+SWEP.Secondary.ClipSize		= -1
+SWEP.Secondary.DefaultClip	= -1
+SWEP.Secondary.Automatic   	= false
+SWEP.Secondary.Ammo         = "none"
+SWEP.Secondary.Sound		= ""
+SWEP.Secondary.Tracer		= -1
+
+local CanAttack = true;
+	self.PrintName = translate and translate.magnum or "Magnum"
 
 function SWEP:Initialize()
 	self.PrintName = translate and translate.magnum or "Magnum"
-	self:SetHoldType(self.HoldType)
-	self:SetCanAttack(true)
-end
-
-function SWEP:SetupDataTables()
-	self:NetworkVar("Bool", 0, "CanAttack")
+	CanAttack = true
 end
 
 function SWEP:BulletCallback(att, tr, dmg)
@@ -73,7 +56,7 @@ function SWEP:BulletCallback(att, tr, dmg)
 end
 
 function SWEP:PrimaryAttack()
-	if !self:GetCanAttack() then return false end
+	if !CanAttack then return false end
 	
 	local bullet = {}
 	bullet.Num = self.Primary.NumShots
@@ -91,7 +74,7 @@ function SWEP:PrimaryAttack()
 	self.Owner:ViewPunch(Angle(-self.Primary.Recoil, 0, 0))
 
 	self.NextLower = CurTime() + 0.4
-	self:SetCanAttack(false)
+	CanAttack = false
 end
 
 function SWEP:SecondaryAttack()
@@ -100,7 +83,7 @@ end
 function SWEP:Think()
 	if self.NextAttack && self.NextAttack < CurTime() then
 		self.NextAttack = nil
-		self:SetCanAttack(true)
+		CanAttack = true
 	end
 	if self.NextLower && self.NextLower < CurTime() then
 		self.NextLower = nil
@@ -119,11 +102,8 @@ function SWEP:Think()
 	end
 end
 
-function SWEP:Reload()
-end
-
 function SWEP:Deploy()
-	if !self:GetCanAttack() then
+	if !CanAttack then
 		self.NextAttack = nil
 		self.NextLower = nil
 		self.NextUpper = CurTime() + self.Primary.ReloadTime
@@ -136,16 +116,4 @@ end
 
 function SWEP:Holster()
 	return true
-end
-
-function SWEP:OnRemove()
-end
-
-function SWEP:OnRestore()
-end
-
-function SWEP:Precache()
-end
-
-function SWEP:OwnerChanged()
 end
