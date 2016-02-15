@@ -1,4 +1,6 @@
+local lplayer
 local splayer
+
 local ments
 
 local radialOpen = false
@@ -40,6 +42,29 @@ local function getSelected()
 	end
 end
 
+function GetColor(col)
+	if string.len(col.x) > 3 then
+		col.x = string.sub(col.x, 1, 4)
+	end
+	if string.len(col.y) > 3 then
+		col.y = string.sub(col.y, 1, 4)
+	end
+	if string.len(col.z) > 3 then
+		col.z = string.sub(col.z, 1, 4)
+	end
+					
+	col.x = col.x * 255
+	col.x = math.ceil(col.x)
+				
+	col.y = col.y * 255
+	col.y = math.ceil(col.y)
+				
+	col.z = col.z * 255
+	col.z = math.ceil(col.z)
+	
+	return col
+end
+
 function GM:RadialMousePressed(code, vec)
 	if radialOpen then
 		local selected = getSelected()
@@ -48,22 +73,41 @@ function GM:RadialMousePressed(code, vec)
 				RunConsoleCommand("mu_taunt", ments[selected].Code)
 				
 				if splayer ~= nil then
-					bname = splayer.Entity:GetBystanderName()
+					lcolor = GetColor(lplayer:GetPlayerColor())
+					bcolor = GetColor(splayer:GetPlayerColor())
+					
+					sname = splayer:GetBystanderName()
 				
 					if ments[selected].Code == "murderer" then
-						RunConsoleCommand("say", bname..translate.murdererIs)
+						chat.AddText(
+							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
+							Color(255,255,255), ": ",
+							Color(bcolor.x, bcolor.y, bcolor.z), sname,
+							Color(255,255,255), translate.murdererIs)
 					end
 				
 					if ments[selected].Code == "suspect" then
-						RunConsoleCommand("say", bname..translate.suspectIs)
+						chat.AddText(
+							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
+							Color(255,255,255), ": ",
+							Color(bcolor.x, bcolor.y, bcolor.z), sname,
+							Color(255,255,255), translate.suspectIs)
 					end
 				
 					if ments[selected].Code == "detective" then
-						RunConsoleCommand("say", bname..translate.detectiveIs)
+						chat.AddText(
+							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
+							Color(255,255,255), ": ",
+							Color(bcolor.x, bcolor.y, bcolor.z), sname,
+							Color(255,255,255), translate.detectiveIs)
 					end
 				
 					if ments[selected].Code == "death" then
-						RunConsoleCommand("say", bname..translate.deathIs)
+						chat.AddText(
+							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
+							Color(255,255,255), ": ",
+							Color(bcolor.x, bcolor.y, bcolor.z), sname,
+							Color(255,255,255), translate.deathIs)
 					end
 				end		
 			end
@@ -82,7 +126,8 @@ end
 
 concommand.Add("+menu", function (client, com, args, full)
 	if client:Alive() && client:Team() == 2 && (client:GetEyeTraceNoCursor().Entity:IsPlayer() || client:GetEyeTraceNoCursor().Entity:IsRagdoll()) then
-		splayer = client:GetEyeTraceNoCursor()
+		lplayer = client
+		splayer = client:GetEyeTraceNoCursor().Entity
 		elements = {}
 			addElement("Murderer", "murderer")
 			addElement("Suspect", "suspect")
