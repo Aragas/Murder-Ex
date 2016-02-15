@@ -93,7 +93,7 @@ pt.voiceMurdererDescription = "Call a murderer"
 pt.voiceSuspect = "Suspect"
 pt.voiceSuspectDescription = "Call a suspect!"
 pt.voiceDetective = "Detective"
-pt.voiceDetectiveDescription = "Calla Detective"
+pt.voiceDetectiveDescription = "Call a Detective"
 pt.voiceDeath = "Death"
 pt.voiceDeathDescription = "He's dead!"
  
