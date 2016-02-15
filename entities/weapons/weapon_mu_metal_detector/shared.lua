@@ -6,7 +6,8 @@ SWEP.WorldModel				= "models/weapons/w_stunbaton.mdl"
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= true
 
-SWEP.Primary.Recoil 		= 0
+SWEP.Primary.ReloadTime 	= 10
+SWEP.Primary.Recoil 		= 5
 SWEP.Primary.ClipSize  		= -1
 SWEP.Primary.DefaultClip 	= 1
 SWEP.Primary.Automatic  	= true
@@ -18,26 +19,34 @@ SWEP.Secondary.DefaultClip	= -1
 SWEP.Secondary.Automatic   	= false
 SWEP.Secondary.Ammo         = "none"
 
+local lastReloadTime = 0
 function SWEP:PrimaryAttack()
-	self.Weapon:SetNextPrimaryFire(CurTime() + 10)
+	if (CurTime() - lastReloadTime) > self.Primary.ReloadTime then 
+	
+		local trace = self.Owner:GetEyeTrace()
 
-	local trace = self.Owner:GetEyeTrace()
+		if not IsValid(trace.Entity) or not trace.Entity:IsPlayer() or trace.Entity:GetPos():Distance(self.Owner:GetPos()) > 120 then
+			return
+		end
 
-	if not IsValid(trace.Entity) or not trace.Entity:IsPlayer() or trace.Entity:GetPos():Distance(self.Owner:GetPos()) > 120 then
-		return
-	end
-
-	for k,v in pairs(trace.Entity:GetWeapons()) do
-		if v:IsValid() then
-			if v:GetClass() ~= "weapon_rp_hands" then  -- don't count Hands
-				self:HasSomething()
-				return
+		for k,v in pairs(trace.Entity:GetWeapons()) do
+			if v:IsValid() then
+				if v:GetClass() ~= "weapon_rp_hands" then  -- don't count Hands
+					self:HasSomething()
+					lastReloadTime = CurTime()
+					return
+				end
 			end
 		end
-	end
 	
-	self:HasNothing() 
+		self:HasNothing() 
+		lastReloadTime = CurTime()
+		return
+	end
+end
 
+function SWEP:Deploy()
+	return true
 end
 
 function SWEP:SecondaryAttack()
@@ -71,10 +80,12 @@ function SWEP:HasSomething()
 		lcolor = GetColor(self.Owner:GetPlayerColor())
 		scolor = GetColor(self.Owner:GetEyeTraceNoCursor().Entity:GetPlayerColor())
 		
+		// duplicating
 		chat.AddText(
 			Color(lcolor.x, lcolor.y, lcolor.z), self.Owner:GetBystanderName(),
 			Color(255,255,255), ": ",
-			Color(scolor.x, scolor.y, scolor.z), splayer:GetBystanderName(),
+			Color(scolor.x, scolor.y, scolor.z), self.Owner:GetEyeTraceNoCursor().Entity:GetBystanderName(),
+			Color(255,255,255), " ",
 			Color(255,255,255), translate.hasSomething)
 	end
 
@@ -89,10 +100,12 @@ function SWEP:HasNothing()
 		lcolor = GetColor(self.Owner:GetPlayerColor())
 		scolor = GetColor(self.Owner:GetEyeTraceNoCursor().Entity:GetPlayerColor())
 		
+		// duplicating
 		chat.AddText(
 			Color(lcolor.x, lcolor.y, lcolor.z), self.Owner:GetBystanderName(),
 			Color(255,255,255), ": ",
-			Color(scolor.x, scolor.y, scolor.z), splayer:GetBystanderName(),
+			Color(scolor.x, scolor.y, scolor.z), self.Owner:GetEyeTraceNoCursor().Entity:GetBystanderName(),
+			Color(255,255,255), " ",
 			Color(255,255,255), translate.hasNothing)
 	end
 
