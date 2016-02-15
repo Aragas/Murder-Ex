@@ -2,18 +2,11 @@ SWEP.Base = "weapon_base"
 SWEP.ViewModel				= "models/weapons/v_357.mdl"
 SWEP.WorldModel				= "models/weapons/w_357.mdl"
 
-SWEP.PrintName 				=  translate and translate.magnum or "Magnum"
-
-SWEP.Weight	= 0
-
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= true
 
-SWEP.AutoSwitchTo			= false
-SWEP.AutoSwitchFrom			= false
 SWEP.DrawAmmo				= true
 SWEP.DrawCrosshair			= true
-SWEP.ViewModelFlip			= false
 
 SWEP.Primary.Delay			= 3
 SWEP.Primary.Recoil			= 5
@@ -26,7 +19,6 @@ SWEP.Primary.DefaultClip	= -1
 SWEP.Primary.Automatic   	= false
 SWEP.Primary.Ammo         	= "none"
 SWEP.Primary.Sound			= "Weapon_357.Single"
-SWEP.Primary.Tracer			= 1
 SWEP.Primary.ReloadTime 	= 3.7
 SWEP.ReloadFinishedSound	= Sound("Weapon_Crossbow.BoltElectrify")
 SWEP.ReloadSound 			= Sound("Weapon_357.Reload")
@@ -41,19 +33,16 @@ SWEP.Secondary.DefaultClip	= -1
 SWEP.Secondary.Automatic   	= false
 SWEP.Secondary.Ammo         = "none"
 SWEP.Secondary.Sound		= ""
-SWEP.Secondary.Tracer		= -1
 
-local CanAttack = true;
-	self.PrintName = translate and translate.magnum or "Magnum"
+local CanAttack = true
 
 function SWEP:Initialize()
-	self.PrintName = translate and translate.magnum or "Magnum"
 	CanAttack = true
 end
 
-function SWEP:BulletCallback(att, tr, dmg)
-	return {effects = true, damage = true}
-end
+//function SWEP:BulletCallback(att, tr, dmg)
+//	return {effects = true, damage = true}
+//end
 
 function SWEP:PrimaryAttack()
 	if !CanAttack then return false end
@@ -75,9 +64,6 @@ function SWEP:PrimaryAttack()
 
 	self.NextLower = CurTime() + 0.4
 	CanAttack = false
-end
-
-function SWEP:SecondaryAttack()
 end
 
 function SWEP:Think()
