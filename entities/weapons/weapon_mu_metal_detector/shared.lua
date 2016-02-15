@@ -43,11 +43,39 @@ end
 function SWEP:SecondaryAttack()
 end
 
+local function GetColor(col)
+	if string.len(col.x) > 3 then
+		col.x = string.sub(col.x, 1, 4)
+	end
+	if string.len(col.y) > 3 then
+		col.y = string.sub(col.y, 1, 4)
+	end
+	if string.len(col.z) > 3 then
+		col.z = string.sub(col.z, 1, 4)
+	end
+					
+	col.x = col.x * 255
+	col.x = math.ceil(col.x)
+				
+	col.y = col.y * 255
+	col.y = math.ceil(col.y)
+				
+	col.z = col.z * 255
+	col.z = math.ceil(col.z)
+	
+	return col
+end
+
 function SWEP:HasSomething()
 	if CLIENT then
-		local bname = self.Owner:GetEyeTraceNoCursor().Entity:GetBystanderName()
+		lcolor = GetColor(self.Owner:GetPlayerColor())
+		scolor = GetColor(self.Owner:GetEyeTraceNoCursor().Entity:GetPlayerColor())
 		
-		RunConsoleCommand("say", bname..translate.hasSomething)
+		chat.AddText(
+			Color(lcolor.x, lcolor.y, lcolor.z), self.Owner:GetBystanderName(),
+			Color(255,255,255), ": ",
+			Color(scolor.x, scolor.y, scolor.z), splayer:GetBystanderName(),
+			Color(255,255,255), translate.hasSomething)
 	end
 
 	if SERVER then
@@ -58,9 +86,14 @@ end
 
 function SWEP:HasNothing()
 	if CLIENT then
-		local bname = LocalPlayer():GetEyeTraceNoCursor().Entity:GetBystanderName()
+		lcolor = GetColor(self.Owner:GetPlayerColor())
+		scolor = GetColor(self.Owner:GetEyeTraceNoCursor().Entity:GetPlayerColor())
 		
-		RunConsoleCommand("say", "["..bcolor.x..", "..bcolor.y..", "..bcolor.z..", 255]"..bname.."[255, 255, 255, 255] "..translate.hasNothing)
+		chat.AddText(
+			Color(lcolor.x, lcolor.y, lcolor.z), self.Owner:GetBystanderName(),
+			Color(255,255,255), ": ",
+			Color(scolor.x, scolor.y, scolor.z), splayer:GetBystanderName(),
+			Color(255,255,255), translate.hasNothing)
 	end
 
 	if SERVER then

@@ -42,7 +42,7 @@ local function getSelected()
 	end
 end
 
-function GetColor(col)
+local function GetColor(col)
 	if string.len(col.x) > 3 then
 		col.x = string.sub(col.x, 1, 4)
 	end
