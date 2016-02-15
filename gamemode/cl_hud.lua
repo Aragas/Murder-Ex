@@ -47,6 +47,12 @@ surface.CreateFont( "MersDeathBig" , {
 	italic = false
 })
 
+surface.CreateFont("ROUND_TIMER_Display", {
+		font        = "Arial",
+		size        = 25,
+		weight        = 1000
+	})
+
 local function drawTextShadow(t,f,x,y,c,px,py)
 	color_black.a = c.a
 	draw.SimpleText(t,f,x + 1,y + 1,color_black,px,py)
@@ -102,6 +108,29 @@ function GM:HUDPaint()
 	end
 
 	self:DrawRadialMenu()
+	
+	local TimeLeft = math.Round((self.RoundStartTime + self.RoundTime) - CurTime())
+	local time2
+	if(TimeLeft % 60 < 10)then
+		time2 = "0"..TimeLeft % 60
+	else
+		time2 = TimeLeft % 60
+	end
+	
+		local time = math.floor(math.max(TimeLeft / 60, 0))..":"..time2
+	
+	// 0 not enough players
+	// 1 playing
+	// 2 round ended, about to restart
+	// 4 waiting for map switch
+	if(self.RoundStage == 1)then
+		draw.SimpleTextOutlined("Раунд закончится через: "..time, "ROUND_TIMER_Display", ScrW()/2, 20, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
+		-- draw.SimpleTextOutlined("Тест: "..TimeLeft, "ROUND_TIMER_Display", ScrW()/2, 40, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
+		-- draw.SimpleTextOutlined("Тест_1: "..time12, "ROUND_TIMER_Display", ScrW()/2, 60, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
+		-- draw.SimpleTextOutlined("Тест_2: "..time13, "ROUND_TIMER_Display", ScrW()/2, 80, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
+	-- else
+		-- draw.SimpleTextOutlined("Бла бла бла закончится через: "..TimeLeft, "ROUND_TIMER_Display", ScrW()/2, 20, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
+	end
 end
 
 function GM:DrawStartRoundInformation()
