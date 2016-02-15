@@ -50,6 +50,8 @@ pt.mapChange = "Changing map to {map}"
 
 pt.roundEnds = "Round ends after: "
 
+pt.adText = "Your ad can be here"
+
 pt.scoreboard = "Scoreboard"
 pt.scoreboardName = "Name"
 pt.scoreboardPing = "Ping"

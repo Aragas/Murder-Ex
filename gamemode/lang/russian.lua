@@ -54,6 +54,8 @@ pt.mapChange = "Смена карты на {map}"
 
 pt.roundEnds = "Раунд закончится через: "
 
+pt.adText = "Ваша реклама может быть здесь"
+
 pt.scoreboard = "Таблица игроков"
 pt.scoreboardName = "Имя"
 pt.scoreboardPing = "Ping"
