@@ -1,8 +1,6 @@
 SWEP.ViewModel				= "models/weapons/v_crowbar.mdl"
 SWEP.WorldModel				= "models/weapons/w_crowbar.mdl"
 
-SWEP.PrintName 				=  translate and translate.hands or "Hands"
-
 SWEP.Spawnable				= false
 SWEP.AdminOnly				= true
 
