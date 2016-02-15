@@ -326,11 +326,30 @@ function GM:StartNewRound()
 		ply:CalculateSpeed()
 		ply:GenerateBystanderName()
 	end
+	
 	local noobs = table.Copy(players)
 	table.RemoveByValue(noobs, murderer)
+	
 	local magnum = table.Random(noobs)
 	if IsValid(magnum) then
 		magnum:Give("weapon_mu_magnum")
+	end
+	table.RemoveByValue(noobs, magnum)
+	
+	local medkit = table.Random(noobs)
+	if IsValid(medkit) then
+		medkit:Give("weapon_mu_medkit")
+	end
+	table.RemoveByValue(noobs, medkit)
+	
+	math.randomseed(CurTime())
+	if table.Count(player.GetAll()) >= 10 and math.random(0, 1) == 1 then
+		local mdetector = table.Random(noobs)
+		if IsValid(mdetector) then
+			mdetector:Give("weapon_mu_metal_detector")
+			mdetector:Give("weapon_mu_stungun")
+		end
+		table.RemoveByValue(noobs, mdetector)
 	end
 
 	self.MurdererLastKill = CurTime()
@@ -342,6 +361,14 @@ function GM:PlayerLeavePlay(ply)
 	if ply:HasWeapon("weapon_mu_magnum") then
 		ply:DropWeapon(ply:GetWeapon("weapon_mu_magnum"))
 	end
+	
+	if ply:HasWeapon("weapon_mu_medkit") then
+		ply:DropWeapon(ply:GetWeapon("weapon_mu_medkit"))
+	end
+	
+	--if ply:HasWeapon("weapon_mu_metal_detector") then
+	--	ply:DropWeapon(ply:GetWeapon("weapon_mu_metal_detector"))
+	--end
 
 	if self.RoundStage == 1 then
 		if ply:GetMurderer() then

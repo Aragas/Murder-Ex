@@ -129,6 +129,32 @@ function GM:DrawStartRoundInformation()
 		t2 = translate.startHelpGunSubtitle
 		desc = translate.table.startHelpGun
 	end
+	
+	local hasMedkit = false
+	for k, wep in pairs(client:GetWeapons()) do
+		if wep:GetClass() == "weapon_mu_medkit" then
+			hasMedkit = true
+			break
+		end
+	end
+	if hasMedkit then
+		t1 = translate.startHelpMedkitTitle
+		t2 = translate.startHelpMedkitSubtitle
+		desc = translate.table.startHelpMedkit
+	end
+	
+	local hasMetalDetector = false
+	for k, wep in pairs(client:GetWeapons()) do
+		if wep:GetClass() == "weapon_mu_metal_detector" then
+			hasMetalDetector = true
+			break
+		end
+	end
+	if hasMetalDetector then
+		t1 = translate.startHelpMetalDetectorTitle
+		t2 = translate.startHelpMetalDetectorSubtitle
+		desc = translate.table.startHelpMetalDetector
+	end
 
 	drawTextShadow(t1, "MersRadial", ScrW() / 2, ScrH()  * 0.25, c, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	if t2 then

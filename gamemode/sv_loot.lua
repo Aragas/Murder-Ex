@@ -146,11 +146,20 @@ function GM:PlayerPickupLoot(ply, ent)
 	ply.LootCollected = ply.LootCollected + 1
 
 	if !ply:GetMurderer() then
-		if ply.LootCollected == 5 then
-			giveMagnum(ply)
-		end
-		if ply.LootCollected % 15 == 0 then
-			giveMagnum(ply)
+		if ply:GetPoliceman() then
+			if ply.LootCollected == 3 then
+				giveMagnum(ply)
+			end
+			if ply.LootCollected % 9 == 0 then
+				giveMagnum(ply)
+			end
+		else
+			if ply.LootCollected == 5 then
+				giveMagnum(ply)
+			end
+			if ply.LootCollected % 15 == 0 then
+				giveMagnum(ply)
+			end
 		end
 	end
 

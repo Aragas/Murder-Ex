@@ -1,6 +1,14 @@
 local PlayerMeta = FindMetaTable("Player")
 local EntityMeta = FindMetaTable("Entity")
 
+function PlayerMeta:GetPoliceman(bool)
+	return self:HasWeapon("weapon_mu_metal_detector") && self:HasWeapon("weapon_mu_stungun")
+end
+
+function PlayerMeta:GetMedic(bool)
+	return self:HasWeapon("weapon_mu_medkit")
+end
+
 function GM:PlayerInitialSpawn( ply )
 	ply.LootCollected = 0
 	ply.MurdererChance = 1
@@ -137,7 +145,7 @@ end
 function GM:DoPlayerDeath( ply, attacker, dmginfo )
 
 	for k, weapon in pairs(ply:GetWeapons()) do
-		if weapon:GetClass() == "weapon_mu_magnum" then
+		if weapon:GetClass() == "weapon_mu_magnum" || weapon:GetClass() == "weapon_mu_medkit" then -- || weapon:GetClass() == "weapon_mu_metal_detector" then
 			ply:DropWeapon(weapon)
 		end
 	end
@@ -195,14 +203,14 @@ function plyMeta:CalculateSpeed()
 
 	// handcuffs
 	-- if self:GetHandcuffed() then
-	-- 	walk = walk * 0.3
-	-- 	jumppower = 150
-	-- 	canrun = false
+		-- walk = walk * 0.3
+		-- jumppower = 150
+		-- canrun = false
 	-- end
 	-- if self:GetTasered() then
-	-- 	walk = 40
-	-- 	jumppower = 100
-	-- 	canrun = false
+		-- walk = 40
+		-- jumppower = 100
+		-- canrun = false
 	-- end
 
 	// set out new speeds
@@ -391,6 +399,12 @@ function GM:PlayerCanPickupWeapon( ply, ent )
 			return false
 		end
 	end
+	
+	-- if ent:GetClass() == "weapon_mu_medkit" then // -- TODO:
+		-- if ply:GetMurderer() || ply:GetTKer()  then
+			-- return false
+		-- end
+	-- end
 
 	return true
 end
