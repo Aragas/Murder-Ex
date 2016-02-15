@@ -74,7 +74,7 @@ function GM:RadialMousePressed(code, vec)
 				
 				if splayer ~= nil then
 					lcolor = GetColor(lplayer:GetPlayerColor())
-					bcolor = GetColor(splayer:GetPlayerColor())
+					scolor = GetColor(splayer:GetPlayerColor())
 					
 					sname = splayer:GetBystanderName()
 				
@@ -82,7 +82,8 @@ function GM:RadialMousePressed(code, vec)
 						chat.AddText(
 							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
 							Color(255,255,255), ": ",
-							Color(bcolor.x, bcolor.y, bcolor.z), sname,
+							Color(scolor.x, scolor.y, scolor.z), sname,
+							Color(255,255,255), " ",
 							Color(255,255,255), translate.murdererIs)
 					end
 				
@@ -90,7 +91,8 @@ function GM:RadialMousePressed(code, vec)
 						chat.AddText(
 							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
 							Color(255,255,255), ": ",
-							Color(bcolor.x, bcolor.y, bcolor.z), sname,
+							Color(scolor.x, scolor.y, scolor.z), sname,
+							Color(255,255,255), " ",
 							Color(255,255,255), translate.suspectIs)
 					end
 				
@@ -98,7 +100,8 @@ function GM:RadialMousePressed(code, vec)
 						chat.AddText(
 							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
 							Color(255,255,255), ": ",
-							Color(bcolor.x, bcolor.y, bcolor.z), sname,
+							Color(scolor.x, scolor.y, scolor.z), sname,
+							Color(255,255,255), " ",
 							Color(255,255,255), translate.detectiveIs)
 					end
 				
@@ -106,7 +109,8 @@ function GM:RadialMousePressed(code, vec)
 						chat.AddText(
 							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
 							Color(255,255,255), ": ",
-							Color(bcolor.x, bcolor.y, bcolor.z), sname,
+							Color(scolor.x, scolor.y, scolor.z), sname,
+							Color(255,255,255), " ",
 							Color(255,255,255), translate.deathIs)
 					end
 				end		
