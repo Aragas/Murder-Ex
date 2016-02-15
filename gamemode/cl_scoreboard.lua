@@ -288,7 +288,7 @@ function GM:ScoreboardShow()
 			self:SetSize(w,h)
 		end
 
-		local lab = Label("by Mechanical Mind version " .. tostring(GAMEMODE.Version or "error"), menu.Credits)
+		local lab = Label("by Mechanical Mind and contributors version " .. tostring(GAMEMODE.Version or "error"), menu.Credits)
 		lab:Dock(RIGHT)
 		lab:SetFont("MersText1")
 		lab.PerformLayout = name.PerformLayout
