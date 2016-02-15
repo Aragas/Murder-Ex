@@ -48,6 +48,8 @@ pt.adminMoveToSpectate = "Move to {spectate}"
 
 pt.mapChange = "Changing map to {map}"
 
+pt.roundEnds = "Round ends after: "
+
 pt.scoreboard = "Scoreboard"
 pt.scoreboardName = "Name"
 pt.scoreboardPing = "Ping"

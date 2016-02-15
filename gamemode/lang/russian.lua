@@ -52,6 +52,8 @@ pt.adminMoveToSpectate = "Переместить в {spectate}"
 
 pt.mapChange = "Смена карты на {map}"
 
+pt.roundEnds = "Раунд закончится через: "
+
 pt.scoreboard = "Таблица игроков"
 pt.scoreboardName = "Имя"
 pt.scoreboardPing = "Ping"

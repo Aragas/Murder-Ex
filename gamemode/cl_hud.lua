@@ -124,7 +124,7 @@ function GM:HUDPaint()
 	// 2 round ended, about to restart
 	// 4 waiting for map switch
 	if(self.RoundStage == 1)then
-		draw.SimpleTextOutlined("Раунд закончится через: "..time, "ROUND_TIMER_Display", ScrW()/2, 20, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
+		draw.SimpleTextOutlined(translate.roundEnds..time, "ROUND_TIMER_Display", ScrW()/2, 20, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
 		-- draw.SimpleTextOutlined("Тест: "..TimeLeft, "ROUND_TIMER_Display", ScrW()/2, 40, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
 		-- draw.SimpleTextOutlined("Тест_1: "..time12, "ROUND_TIMER_Display", ScrW()/2, 60, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
 		-- draw.SimpleTextOutlined("Тест_2: "..time13, "ROUND_TIMER_Display", ScrW()/2, 80, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
