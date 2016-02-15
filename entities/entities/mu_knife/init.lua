@@ -1,8 +1,7 @@
-
 AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
-include('shared.lua')
 
+include('shared.lua')
 
 function ENT:Initialize()
 	self:SetModel("models/weapons/w_knife_t.mdl")
@@ -115,4 +114,3 @@ function ENT:PhysicsCollide( data, physobj )
 
 	self.HitSomething = true
 end
-

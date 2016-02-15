@@ -1,4 +1,5 @@
 AddCSLuaFile("shared.lua")
+
 include("shared.lua")
 
 ENT.TraitorButton = true
