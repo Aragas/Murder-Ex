@@ -6,6 +6,12 @@ pt.knife = "Knife"
 pt.magnum = "Magnum"
 pt.gun = "Gun"
 pt.hands = "Hands"
+pt.medkit = "Medkit"
+pt.metalDetector = "Metal Detector"
+pt.stungun = "Stungun"
+
+pt.hasSomething = "has something!!"
+pt.hasNothing = "has nothing!"
 
 
 pt.teamSpectators = "Spectators"
@@ -52,6 +58,7 @@ pt.scoreboardRefresh = "Refresh"
 
 pt.scoreboardJoinTeam = "Join"
 
+pt.scoreboardGetSteamId = "Open Steam profile"
 pt.scoreboardActionAdmin = "Is an admin"
 pt.scoreboardActionMute = "Mute"
 pt.scoreboardActionUnmute = "Unmute"
@@ -79,6 +86,20 @@ pt.voiceScreamDescription = "Like a little girl"
 pt.voiceMorose = "Morose"
 pt.voiceMoroseDescription = "Feel the sadness"
 
+pt.voiceMurderer = "Murderer!"
+pt.voiceMurdererDescription = "Call a murderer"
+pt.voiceSuspect = "Suspect"
+pt.voiceSuspectDescription = "Call a suspect!"
+pt.voiceDetective = "Detective"
+pt.voiceDetectiveDescription = "Calla Detective"
+pt.voiceDeath = "Death"
+pt.voiceDeathDescription = "He's dead!"
+ 
+pt.murdererIs = " is the murderer!"
+pt.suspectIs = " is suspicious!"
+pt.detectiveIs = " is detective!"
+pt.deathIs = " is dead!"
+
 
 pt.startHelpBystanderTitle = "You are a bystander"
 pt.startHelpBystander = {
@@ -86,6 +107,20 @@ pt.startHelpBystander = {
 	"Don't get killed"
 }
 
+pt.startHelpMetalDetectorTitle = "You are a policeman"
+pt.startHelpMetalDetectorSubtitle = " with a metal detector and stungun"
+pt.startHelpMetalDetector = {
+    "There is a murderer on the loose",
+    "Find him"
+}
+
+
+pt.startHelpMedkitTitle = "You are a bystander"
+pt.startHelpMedkitSubtitle = "with a medkit"
+pt.startHelpMedkit = {
+	"There is a murderer on the loose",
+	"Don't get killed"
+}
 
 pt.startHelpGunTitle = "You are a bystander"
 pt.startHelpGunSubtitle = "with a secret weapon"

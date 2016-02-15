@@ -3,15 +3,20 @@ Encoding must be UTF-8, or you will get "�".
 Translated by Fixator10
 --]]
 
-pt.bystander = "Свидетель"
-pt.murderer = "Убийца"
-pt.spectator = "Наблюдатель"
+pt.bystander 	= "Свидетель"
+pt.murderer 	= "Убийца"
+pt.spectator 	= "Наблюдатель"
 
-pt.knife = "Hож"
-pt.magnum = "Магнум"
-pt.gun = "Оружие"
-pt.hands = "Руки"
+pt.knife 			= "Hож"
+pt.magnum 			= "Магнум"
+pt.gun 				= "Оружие"
+pt.hands 			= "Руки"
+pt.medkit 			= "Аптечка"
+pt.metalDetector 	= "Металлоискатель"
+pt.stungun 			= "Электрошокер"
 
+pt.hasSomething = "что-то хранит!"
+pt.hasNothing = "пуст!"
 
 pt.teamSpectators = "Наблюдатели"
 pt.teamPlayers = "Игроки"
@@ -57,16 +62,17 @@ pt.scoreboardRefresh = "Обновить"
 
 pt.scoreboardJoinTeam = "Присоединиться"
 
+pt.scoreboardGetSteamId = "Открыть профиль Steam"
 pt.scoreboardActionAdmin = "Администратор"
-pt.scoreboardActionMute = "Заглушить"
-pt.scoreboardActionUnmute = "Снять заглушку"
+pt.scoreboardActionMute = "Отключить микрофон"
+pt.scoreboardActionUnmute = "Включить микрофон"
 
 pt.endroundMurdererQuit = "Свидетели победили! Убийца вышел"
 pt.endroundBystandersWin = "Свидетели победили!"
 pt.endroundMurdererWins = "Убийца победил!"
 pt.endroundMurdererWas = "Убийцей был {murderer}"
 
-pt.endroundLootCollected = "Собрана Улика"
+pt.endroundLootCollected = "Найденно Улик"
 
 pt.adminPanel = "Панель Администратора"
 
@@ -74,28 +80,55 @@ pt.spectating = "Наблюдение"
 
 pt.adMelonbomberWhy = "Почему бы не попробовать "
 pt.adMelonbomberBy = " игровой режим от создателя Murder"
+
 pt.voiceHelp = "Помогите"
 pt.voiceHelpDescription = "Позвать на помощь"
 pt.voiceFunny = "Шутка"
-pt.voiceFunnyDescription = "Немного пошутить"
+pt.voiceFunnyDescription = "Рассказать свою лучшую шутку"
 pt.voiceScream = "Крик"
 pt.voiceScreamDescription = "Как маленькая девочка"
 pt.voiceMorose = "Мрачность"
 pt.voiceMoroseDescription = "Все очень плохо"
 
+pt.voiceMurderer = "Убийца!"
+pt.voiceMurdererDescription = "Назвать Убийца"
+pt.voiceSuspect = "Подозрение"
+pt.voiceSuspectDescription = "Он может быть Убийцей!"
+pt.voiceDetective = "Детектив"
+pt.voiceDetectiveDescription = "Конан спешит на помощь!"
+pt.voiceDeath = "Мертв"
+pt.voiceDeathDescription = "Он мертв!"
+
+pt.murdererIs = " убийца!"
+pt.suspectIs = " подозрителен!"
+pt.detectiveIs = " детектив!"
+pt.deathIs = " мертв!"
 
 pt.startHelpBystanderTitle = "Вы свидетель"
 pt.startHelpBystander = {
 	"Убийца на свободе",
-	"Не умрите"
+	"Не дай себя убить"
 }
 
+pt.startHelpMetalDetectorTitle = "Вы полицейский"
+pt.startHelpMetalDetectorSubtitle = " с металлоискателем и электрошокером"
+pt.startHelpMetalDetector = {
+	"Преступник на свободе",
+	"Найдите его"
+}
+
+pt.startHelpMedkitTitle = "Вы свидетель"
+pt.startHelpMedkitSubtitle = "с аптечкой"
+pt.startHelpMedkit = {
+	"Преступник на свободе",
+	"Не дай себя убить"
+}
 
 pt.startHelpGunTitle = "Вы свидетель"
 pt.startHelpGunSubtitle = "с секретным оружием"
 pt.startHelpGun = {
 	"Убийца на свободе",
-	"Найдите и убейте его"
+	"Найди и убей его"
 }
 
 pt.startHelpMurdererTitle = "Вы убийца"
@@ -104,10 +137,10 @@ pt.startHelpMurderer = {
 	"Но не попадитесь!"
 }
 
-pt.murdererFog = "Ваша злая сущность стала видимой"
-pt.murdererFogSub = "Убейте кого-нибудь чтобы спрятаться"
+pt.murdererFog = "Ваша злая сущность начинает проявляться"
+pt.murdererFogSub = "Убейте кого-нибудь чтобы скрыться"
 
-pt.pressEToDisguiseFor1Loot = "[E] Замаскироваться за 1 улику"
+pt.pressEToDisguiseFor1Loot = "[E] Переодеться за 1 улику"
 
 pt.playerStatusDead = "Мертв"
 

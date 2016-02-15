@@ -1,3 +1,4 @@
+local splayer
 local ments
 
 local radialOpen = false
@@ -45,6 +46,26 @@ function GM:RadialMousePressed(code, vec)
 		if selected && selected > 0 && code == MOUSE_LEFT then
 			if selected && ments[selected] then
 				RunConsoleCommand("mu_taunt", ments[selected].Code)
+				
+				if splayer ~= nil then
+					bname = splayer.Entity:GetBystanderName()
+				
+					if ments[selected].Code == "murderer" then
+						RunConsoleCommand("say", bname..translate.murdererIs)
+					end
+				
+					if ments[selected].Code == "suspect" then
+						RunConsoleCommand("say", bname..translate.suspectIs)
+					end
+				
+					if ments[selected].Code == "detective" then
+						RunConsoleCommand("say", bname..translate.detectiveIs)
+					end
+				
+					if ments[selected].Code == "death" then
+						RunConsoleCommand("say", bname..translate.deathIs)
+					end
+				end		
 			end
 		end
 		self:CloseRadialMenu()
@@ -60,12 +81,20 @@ local function addElement(transCode, code)
 end
 
 concommand.Add("+menu", function (client, com, args, full)
-	if client:Alive() && client:Team() == 2 then
+	if client:Alive() && client:Team() == 2 && (client:GetEyeTraceNoCursor().Entity:IsPlayer() || client:GetEyeTraceNoCursor().Entity:IsRagdoll()) then
+		splayer = client:GetEyeTraceNoCursor()
 		elements = {}
-		addElement("Help", "help")
-		addElement("Funny", "funny")
-		addElement("Scream", "scream")
-		addElement("Morose", "morose")
+			addElement("Murderer", "murderer")
+			addElement("Suspect", "suspect")
+			addElement("Detective", "detective")
+			addElement("Death", "death")
+		GAMEMODE:OpenRadialMenu(elements)
+	elseif client:Alive() && client:Team() == 2 then
+		elements = {}
+			addElement("Help", "help")
+			addElement("Funny", "funny")
+			addElement("Scream", "scream")
+			addElement("Morose", "morose")
 		GAMEMODE:OpenRadialMenu(elements)
 	end
 end)
