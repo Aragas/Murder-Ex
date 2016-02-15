@@ -1,12 +1,12 @@
 include("shared.lua")
 
-SWEP.DrawAmmo = false
-SWEP.DrawCrosshair = true
+SWEP.DrawAmmo 		= false
+SWEP.DrawCrosshair 	= true
 
-SWEP.ViewModelFOV = 65
+SWEP.ViewModelFOV 	= 65
 
-SWEP.Slot = 1
-SWEP.SlotPos = 1
+SWEP.Slot			= 1
+SWEP.SlotPos 		= 1
 
 killicon.AddFont("weapon_mu_knife", "HL2MPTypeDeath", "5", Color(0, 0, 255, 255))
 
@@ -14,6 +14,7 @@ function SWEP:DrawWeaponSelection( x, y, w, h, alpha )
 end
 
 function SWEP:Initialize()
+	self.PrintName = translate and translate.knife or "Knife"
 end
 
 function SWEP:Deploy()
@@ -22,10 +23,6 @@ end
 
 function SWEP:Holster()
 	return true
-end
-
-function SWEP:DrawViewModel()	
-	return false
 end
 
 function SWEP:DrawWorldModel()	
