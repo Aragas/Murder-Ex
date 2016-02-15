@@ -99,10 +99,10 @@ pt.voiceDetectiveDescription = "Call a Detective"
 pt.voiceDeath = "Death"
 pt.voiceDeathDescription = "He's dead!"
  
-pt.murdererIs = " is the murderer!"
-pt.suspectIs = " is suspicious!"
-pt.detectiveIs = " is detective!"
-pt.deathIs = " is dead!"
+pt.murdererIs = "is the murderer!"
+pt.suspectIs = "is suspicious!"
+pt.detectiveIs = "is detective!"
+pt.deathIs = "is dead!"
 
 
 pt.startHelpBystanderTitle = "You are a bystander"
