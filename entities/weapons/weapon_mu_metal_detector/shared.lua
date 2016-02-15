@@ -45,21 +45,9 @@ end
 
 function SWEP:HasSomething()
 	if CLIENT then
-		local client = self.Owner
+		local bname = self.Owner:GetEyeTraceNoCursor().Entity:GetBystanderName()
 		
-		local bcolor = client:GetEyeTraceNoCursor().Entity:GetPlayerColor()
-		bcolor.x = bcolor.x * 255
-		bcolor.x = math.ceil(bcolor.x)
-		
-		bcolor.y = bcolor.y * 255
-		bcolor.y = math.ceil(bcolor.y)
-		
-		bcolor.z = bcolor.z * 255
-		bcolor.z = math.ceil(bcolor.z)
-		
-		local bname = client:GetEyeTraceNoCursor().Entity:GetBystanderName()
-		
-		RunConsoleCommand("say", "["..bcolor.x..", "..bcolor.y..", "..bcolor.z..", 255]"..bname.."[255, 255, 255, 255] "..translate.hasSomething)
+		RunConsoleCommand("say", bname..translate.hasSomething)
 	end
 
 	if SERVER then
@@ -70,19 +58,7 @@ end
 
 function SWEP:HasNothing()
 	if CLIENT then
-		local client = LocalPlayer()
-		
-		local bcolor = client:GetEyeTraceNoCursor().Entity:GetPlayerColor()
-		bcolor.x = bcolor.x * 255
-		bcolor.x = math.ceil(bcolor.x)
-		
-		bcolor.y = bcolor.y * 255
-		bcolor.y = math.ceil(bcolor.y)
-		
-		bcolor.z = bcolor.z * 255
-		bcolor.z = math.ceil(bcolor.z)
-		
-		local bname = client:GetEyeTraceNoCursor().Entity:GetBystanderName()
+		local bname = LocalPlayer():GetEyeTraceNoCursor().Entity:GetBystanderName()
 		
 		RunConsoleCommand("say", "["..bcolor.x..", "..bcolor.y..", "..bcolor.z..", 255]"..bname.."[255, 255, 255, 255] "..translate.hasNothing)
 	end
