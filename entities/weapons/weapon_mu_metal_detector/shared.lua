@@ -19,30 +19,29 @@ SWEP.Secondary.DefaultClip	= -1
 SWEP.Secondary.Automatic   	= false
 SWEP.Secondary.Ammo         = "none"
 
-local lastReloadTime = 0
 function SWEP:PrimaryAttack()
-	if (CurTime() - lastReloadTime) > self.Primary.ReloadTime then 
+	if !self.LastReloadTime then self.LastReloadTime = 0 end
+	if (CurTime() - self.LastReloadTime) < self.Primary.ReloadTime then return false end
 	
-		local trace = self.Owner:GetEyeTrace()
+	local trace = self.Owner:GetEyeTrace()
 
-		if not IsValid(trace.Entity) or not trace.Entity:IsPlayer() or trace.Entity:GetPos():Distance(self.Owner:GetPos()) > 120 then
-			return
-		end
-
-		for k,v in pairs(trace.Entity:GetWeapons()) do
-			if v:IsValid() then
-				if v:GetClass() ~= "weapon_rp_hands" then  -- don't count Hands
-					self:HasSomething()
-					lastReloadTime = CurTime()
-					return
-				end
-			end
-		end
-	
-		self:HasNothing() 
-		lastReloadTime = CurTime()
+	if not IsValid(trace.Entity) or not trace.Entity:IsPlayer() or trace.Entity:GetPos():Distance(self.Owner:GetPos()) > 120 then
 		return
 	end
+
+	for k,v in pairs(trace.Entity:GetWeapons()) do
+		if v:IsValid() then
+			if v:GetClass() ~= "weapon_rp_hands" then  -- don't count Hands
+				self:HasSomething()
+				self.LastReloadTime = CurTime()
+				return
+			end
+		end
+	end
+	
+	self:HasNothing() 
+	self.LastReloadTime = CurTime()
+	return
 end
 
 function SWEP:Deploy()
