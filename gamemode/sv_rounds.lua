@@ -351,11 +351,13 @@ function GM:StartNewRound()
 	end
 	table.RemoveByValue(noobs, magnum)
 	
-	local medkit = table.Random(noobs)
-	if IsValid(medkit) then
-		medkit:Give("weapon_mu_medkit")
+	if table.Count(player.GetAll()) >= 5 then
+		local medkit = table.Random(noobs)
+		if IsValid(medkit) then
+			medkit:Give("weapon_mu_medkit")
+		end
+		table.RemoveByValue(noobs, medkit)
 	end
-	table.RemoveByValue(noobs, medkit)
 	
 	math.randomseed(CurTime())
 	if table.Count(player.GetAll()) >= 10 and math.random(0, 1) == 1 then
@@ -388,6 +390,10 @@ function GM:PlayerLeavePlay(ply)
 	
 	--if ply:HasWeapon("weapon_mu_metal_detector") then
 	--	ply:DropWeapon(ply:GetWeapon("weapon_mu_metal_detector"))
+	--end
+	
+	--if ply:HasWeapon("weapon_mu_stungun") then
+	--	ply:DropWeapon(ply:GetWeapon("weapon_mu_stungun"))
 	--end
 
 	if self.RoundStage == 1 then
