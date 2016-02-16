@@ -27,9 +27,6 @@ SWEP.Secondary.DefaultClip	= -1
 SWEP.Secondary.Automatic   	= false
 SWEP.Secondary.Ammo         = "none"
 
-function SWEP:Initialize()
-end
-
 function SWEP:GetTrace(left, up)
 	local trace = {}
 	trace.filter = self.Owner
