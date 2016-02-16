@@ -25,7 +25,7 @@ SWEP.Secondary.Ammo 		= "none"
 function SWEP:PrimaryAttack()
 	local player = self.Owner:GetEyeTrace().Entity
 	
-	if player && self.Owner:GetPos():Distance(player:GetPos()) <= 85  then
+	if player && player:Health() < 100 && self.Owner:GetPos():Distance(player:GetPos()) <= 85 then
 		player:SetHealth(player:Health() + 1)
 		self.Owner:EmitSound("hl1/fvox/boop.wav", 150, player:Health())
 	end
