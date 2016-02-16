@@ -34,18 +34,12 @@ SWEP.Secondary.Automatic   	= false
 SWEP.Secondary.Ammo         = "none"
 SWEP.Secondary.Sound		= ""
 
-local CanAttack = true
-
-function SWEP:Initialize()
-	CanAttack = true
+function SWEP:SetupDataTables()
+	self:NetworkVar("Bool", 0, "CanAttack")
 end
 
-//function SWEP:BulletCallback(att, tr, dmg)
-//	return {effects = true, damage = true}
-//end
-
 function SWEP:PrimaryAttack()
-	if !CanAttack then return false end
+	if !self:GetCanAttack() then return false end
 	
 	local bullet = {}
 	bullet.Num = self.Primary.NumShots
@@ -63,13 +57,13 @@ function SWEP:PrimaryAttack()
 	self.Owner:ViewPunch(Angle(-self.Primary.Recoil, 0, 0))
 
 	self.NextLower = CurTime() + 0.4
-	CanAttack = false
+	self:SetCanAttack(false)
 end
 
 function SWEP:Think()
 	if self.NextAttack && self.NextAttack < CurTime() then
 		self.NextAttack = nil
-		CanAttack = true
+		self:SetCanAttack(true)
 	end
 	if self.NextLower && self.NextLower < CurTime() then
 		self.NextLower = nil
@@ -89,7 +83,7 @@ function SWEP:Think()
 end
 
 function SWEP:Deploy()
-	if !CanAttack then
+	if !self:GetCanAttack() then
 		self.NextAttack = nil
 		self.NextLower = nil
 		self.NextUpper = CurTime() + self.Primary.ReloadTime
