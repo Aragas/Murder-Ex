@@ -1,10 +1,10 @@
-GM.Name 	= "Murder"
-GM.Author 	= "MechanicalMind"
+GM.Name 	= "Murder-Ex"
+GM.Author 	= "MechanicalMind and Contributors"
 // credits to Minty Fresh for some styling on the scoreboard
 // credits to Waddlesworth for the logo and menu icon
 GM.Email 	= ""
-GM.Website 	= "www.codingconcoctions.com/murder/"
-GM.Version = "21"
+GM.Website 	= "https://github.com/Aragas/murder-extended"
+GM.Version = "22"
 
 function GM:SetupTeams()
 	team.SetUp(1, translate.teamSpectators, Color(150, 150, 150))
