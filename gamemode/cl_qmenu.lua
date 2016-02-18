@@ -84,7 +84,7 @@ function GM:RadialMousePressed(code, vec)
 							Color(255,255,255), ": ",
 							Color(scolor.x, scolor.y, scolor.z), sname,
 							Color(255,255,255), " ",
-							Color(255,255,255), translate.murdererIs)
+							Color(255,255,255), translate.sayMurderer)
 					end
 				
 					if ments[selected].Code == "suspect" then
@@ -93,16 +93,17 @@ function GM:RadialMousePressed(code, vec)
 							Color(255,255,255), ": ",
 							Color(scolor.x, scolor.y, scolor.z), sname,
 							Color(255,255,255), " ",
-							Color(255,255,255), translate.suspectIs)
+							Color(255,255,255), translate.saySuspect)
 					end
 				
-					if ments[selected].Code == "detective" then
+					if ments[selected].Code == "isee" then
 						chat.AddText(
 							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
 							Color(255,255,255), ": ",
-							Color(scolor.x, scolor.y, scolor.z), sname,
+							Color(255,255,255), translate.saySee,
 							Color(255,255,255), " ",
-							Color(255,255,255), translate.detectiveIs)
+							Color(scolor.x, scolor.y, scolor.z), sname,
+							Color(255,255,255), "!")
 					end
 				
 					if ments[selected].Code == "death" then
@@ -111,7 +112,7 @@ function GM:RadialMousePressed(code, vec)
 							Color(255,255,255), ": ",
 							Color(scolor.x, scolor.y, scolor.z), sname,
 							Color(255,255,255), " ",
-							Color(255,255,255), translate.deathIs)
+							Color(255,255,255), translate.sayDeath)
 					end
 				end		
 			end
@@ -135,7 +136,7 @@ concommand.Add("+menu", function (client, com, args, full)
 		elements = {}
 			addElement("Murderer", "murderer")
 			addElement("Suspect", "suspect")
-			addElement("Detective", "detective")
+			addElement("ISee", "isee")
 			addElement("Death", "death")
 		GAMEMODE:OpenRadialMenu(elements)
 	elseif client:Alive() && client:Team() == 2 then
