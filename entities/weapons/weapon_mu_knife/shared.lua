@@ -46,6 +46,14 @@ function SWEP:GetTrace(left, up)
 end
 
 
+function SWEP:CanPrimaryAttack()
+	return true
+end
+
+function SWEP:CanSecondaryAttack()
+	return true
+end
+
 function SWEP:PrimaryAttack()
 	if self.ChargeStart then
 		self.ChargeStart = nil

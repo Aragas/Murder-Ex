@@ -22,6 +22,14 @@ SWEP.Secondary.Automatic 	= true
 SWEP.Secondary.Delay 		= 0.3
 SWEP.Secondary.Ammo 		= "none"
 
+function SWEP:CanPrimaryAttack()
+	return true
+end
+
+function SWEP:CanSecondaryAttack()
+	return true
+end
+
 function SWEP:PrimaryAttack()
 	local player = self.Owner:GetEyeTrace().Entity
 	

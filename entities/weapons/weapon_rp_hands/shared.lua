@@ -37,6 +37,14 @@ function SWEP:Holster()
 	return true
 end
 
+function SWEP:CanPrimaryAttack()
+	return true
+end
+
+function SWEP:CanSecondaryAttack()
+	return false
+end
+
 function SWEP:PrimaryAttack()
 	if SERVER then
 		if IsValid(self.Owner) then

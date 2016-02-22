@@ -19,6 +19,14 @@ SWEP.Secondary.DefaultClip	= -1
 SWEP.Secondary.Automatic   	= false
 SWEP.Secondary.Ammo         = "none"
 
+function SWEP:CanPrimaryAttack()
+	return true
+end
+
+function SWEP:CanSecondaryAttack()
+	return false
+end
+
 function SWEP:PrimaryAttack()
 	if !self.LastReloadTime then self.LastReloadTime = 0 end
 	if (CurTime() - self.LastReloadTime) < self.Primary.ReloadTime then return false end
@@ -46,9 +54,6 @@ end
 
 function SWEP:Deploy()
 	return true
-end
-
-function SWEP:SecondaryAttack()
 end
 
 local function GetColor(col)

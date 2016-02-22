@@ -43,6 +43,14 @@ function SWEP:SetupDataTables()
 	self:SetCanAttack(true)
 end
 
+function SWEP:CanPrimaryAttack()
+	return true
+end
+
+function SWEP:CanSecondaryAttack()
+	return false
+end
+
 function SWEP:PrimaryAttack()
 	if !self:GetCanAttack() then return false end
 	
