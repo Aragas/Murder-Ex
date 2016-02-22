@@ -87,13 +87,6 @@ function GM:HUDPaint()
 			else // round = 0
 
 			end
-
-			-- local tr = LocalPlayer():GetEyeTrace()
-
-			-- local lc = render.GetLightColor(LocalPlayer():GetPos() + Vector(0,0,30))
-			-- local lt = (lc.r + lc.g + lc.b) / 3
-			-- draw.DrawText("Light:" .. tostring(lc), "MersRadial", ScrW() - 20, 80, color_white, 2)
-			-- draw.DrawText("Average:" .. tostring(math.Round(lt * 100) / 100), "MersRadial", ScrW() - 20, 120, color_white, 2)
 		end
 	else
 		self:RenderSpectate()
@@ -125,11 +118,6 @@ function GM:HUDPaint()
 	// 4 waiting for map switch
 	if(self.RoundStage == 1)then
 		draw.SimpleTextOutlined(Translator:Client(LocalPlayer()).roundEnds..time, "ROUND_TIMER_Display", ScrW()/2, 20, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
-		-- draw.SimpleTextOutlined("Тест: "..TimeLeft, "ROUND_TIMER_Display", ScrW()/2, 40, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
-		-- draw.SimpleTextOutlined("Тест_1: "..time12, "ROUND_TIMER_Display", ScrW()/2, 60, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
-		-- draw.SimpleTextOutlined("Тест_2: "..time13, "ROUND_TIMER_Display", ScrW()/2, 80, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
-	-- else
-		-- draw.SimpleTextOutlined("Бла бла бла закончится через: "..TimeLeft, "ROUND_TIMER_Display", ScrW()/2, 20, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
 	end
 end
 
@@ -318,7 +306,7 @@ function GM:DrawGameHUD(ply)
 		// draw black circle
 		surface.SetTexture(tex)
 		surface.SetDrawColor(color_black)
-		surface.DrawTexturedRect( size * 0.1, ScrH() - size * 1.1, size, size)
+		surface.DrawTexturedRect(size * 0.1, ScrH() - size * 1.1, size, size)
 
 		// draw health circle
 		surface.SetTexture(tex)
@@ -335,7 +323,7 @@ function GM:DrawGameHUD(ply)
 		surface.SetFont("MersRadialSmall")
 		local w,h = surface.GetTextSize(ply:GetBystanderName())
 		local x = math.max(size * 0.6 + w / -2, size * 0.1)
-		drawTextShadow(ply:GetBystanderName(), "MersRadialSmall", x, ScrH() - size * 1.1, col, 0, TEXT_ALIGN_TOP)
+		drawTextShadow(ply:GetBystanderName(), "MersRadialSmall", x, ScrH() - size * 1.1 - size * 0.2, col, 0, TEXT_ALIGN_TOP)
 	end
 
 	local shouldDraw = hook.Run("HUDShouldDraw", "MurderFlashlightCharge")
@@ -372,6 +360,8 @@ function GM:DrawGameHUD(ply)
 	
 	local shouldDraw = hook.Run("HUDShouldDraw", "MurderPlayerType")
 	if shouldDraw != false then
+		local size = ScrW() * 0.08
+	
 		local name = Translator:Client(LocalPlayer()).bystander
 		local color = Color(20,120,255)
 
@@ -379,8 +369,9 @@ function GM:DrawGameHUD(ply)
 			name = Translator:Client(LocalPlayer()).murderer
 			color = Color(190, 20, 20)
 		end
-
-		drawTextShadow(name, "MersRadial", ScrW() - 20, ScrH() - 10, color, 2, TEXT_ALIGN_TOP)
+		
+		local height = draw.GetFontHeight("MersRadial")
+		drawTextShadow(name, "MersRadial", ScrW() - size * 0.1, ScrH() - height - size * 0.1, color, 2, TEXT_ALIGN_TOP)
 	end
 end
 
