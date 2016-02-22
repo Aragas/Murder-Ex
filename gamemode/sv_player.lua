@@ -1,3 +1,5 @@
+util.AddNetworkString("mu_death")
+
 local PlayerMeta = FindMetaTable("Player")
 local EntityMeta = FindMetaTable("Entity")
 
