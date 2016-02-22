@@ -3,7 +3,7 @@ if SERVER then
 	util.AddNetworkString("mu_dochatmsg")
 	
 	net.Receive("mu_dochatmsg", function(len, pl)
-		local pairCount = net.ReadDouble()
+		local pairCount = net.ReadUInt(8)
 		local args = { }
 		
 		for i = 1, pairCount do
@@ -18,9 +18,8 @@ if SERVER then
 end
 if CLIENT then
 	net.Receive("mu_chatmsg", function(len, pl)
+		local pairCount = net.ReadUInt(8)
 		local args = { }
-	
-		local pairCount = net.ReadDouble()
 		local lang = Translator:Client(LocalPlayer())
 		
 		for i = 1, pairCount do
@@ -89,7 +88,7 @@ function Translator:ClientPrint(pairCount, ...)
 
 	if CLIENT then
 		net.Start("mu_dochatmsg")
-		net.WriteDouble(pairCount)
+		net.WriteUInt(pairCount, 8)
 		
 		for l, arg in pairs(args) do
 			if istable(arg) then
@@ -104,7 +103,7 @@ function Translator:ClientPrint(pairCount, ...)
 	if SERVER then
 		for k, ply in pairs(player.GetAll()) do
 			net.Start("mu_chatmsg")
-			net.WriteDouble(pairCount)
+			net.WriteUInt(pairCount, 8)
 		
 			for l, arg in pairs(args) do
 				if istable(arg) then

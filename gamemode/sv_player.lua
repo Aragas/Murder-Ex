@@ -335,7 +335,7 @@ function GM:PlayerDeath(ply, Inflictor, attacker )
 	ply.SpectateTime = CurTime() + 4
 
 	net.Start("mu_death")
-	net.WriteInt(4)
+	net.WriteUInt(4, 4)
 	net.Send(ply)
 	
 	if ( Inflictor && Inflictor == attacker && (Inflictor:IsPlayer() || Inflictor:IsNPC()) ) then
