@@ -20,11 +20,11 @@ local function addPlayerItem(self, mlist, ply, pteam)
 	function but:Paint(w, h)
 		local showAdmins = GAMEMODE.RoundSettings.ShowAdminsOnScoreboard
 
-		if IsValid(ply) && showAdmins && ply:IsAdmin() then
-			surface.SetDrawColor(Color(150, 50, 50))
-		else
+		//if IsValid(ply) && showAdmins && ply:IsAdmin() then
+		//	surface.SetDrawColor(Color(150, 50, 50))
+		//else
 			surface.SetDrawColor(team.GetColor(pteam))
-		end
+		//end
 		surface.DrawRect(0, 0, w, h)
 
 		surface.SetDrawColor(255, 255, 255, 10)
