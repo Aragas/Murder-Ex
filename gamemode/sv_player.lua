@@ -346,7 +346,6 @@ function GM:PlayerDeath(ply, Inflictor, attacker )
 	end
 
 	self:RagdollSetDeathDetails(ply, Inflictor, attacker)
-	hook.Run("MUPlayerDeath", ply, Inflictor, attacker) -- Hook for revarding
 end
 
 function GM:PlayerDeathThink(ply)
