@@ -80,12 +80,13 @@ function SWEP:HasSomething()
 		scolor = GetColor(self.Owner:GetEyeTraceNoCursor().Entity:GetPlayerColor())
 		
 		// duplicating
-		chat.AddText(
-			Color(lcolor.x, lcolor.y, lcolor.z), self.Owner:GetBystanderName(),
-			Color(255,255,255), ": ",
-			Color(scolor.x, scolor.y, scolor.z), self.Owner:GetEyeTraceNoCursor().Entity:GetBystanderName(),
-			Color(255,255,255), " ",
-			Color(255,255,255), translate.hasSomething)
+		Translator:ClientPrint(5,
+				Color(lcolor.x, lcolor.y, lcolor.z), self.Owner:GetBystanderName(),
+				Color(255,255,255), ": ",
+				Color(scolor.x, scolor.y, scolor.z), self.Owner:GetEyeTraceNoCursor().Entity:GetBystanderName(),
+				Color(255,255,255), " ",
+				Color(255,255,255), "translate.hasSomething"
+		)
 	end
 
 	if SERVER then
@@ -105,7 +106,7 @@ function SWEP:HasNothing()
 			Color(255,255,255), ": ",
 			Color(scolor.x, scolor.y, scolor.z), self.Owner:GetEyeTraceNoCursor().Entity:GetBystanderName(),
 			Color(255,255,255), " ",
-			Color(255,255,255), translate.hasNothing)
+			Color(255,255,255), "translate.hasNothing")
 	end
 
 	if SERVER then

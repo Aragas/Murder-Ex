@@ -1,8 +1,6 @@
 SWEP.ViewModel 				= "models/weapons/v_knife_t.mdl"
 SWEP.WorldModel 			= "models/weapons/w_knife_t.mdl"
 
-SWEP.PrintName 				= translate and translate.knife or "Knife"
-
 SWEP.Spawnable				= true
 SWEP.AdminOnly				= true
 

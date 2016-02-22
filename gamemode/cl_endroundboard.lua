@@ -35,13 +35,13 @@ function GM:DisplayEndRoundBoard(data)
 	winner:SetAutoStretchVertical(true)
 
 	if data.reason == 3 then
-		winner:SetText(translate.endroundMurdererQuit)
+		winner:SetText(Translator:Client(LocalPlayer()).endroundMurdererQuit)
 		winner:SetTextColor(Color(255, 255, 255))
 	elseif data.reason == 2 then
-		winner:SetText(translate.endroundBystandersWin)
+		winner:SetText(Translator:Client(LocalPlayer()).endroundBystandersWin)
 		winner:SetTextColor(Color(20, 120, 255))
 	elseif data.reason == 1 then
-		winner:SetText(translate.endroundMurdererWins)
+		winner:SetText(Translator:Client(LocalPlayer()).endroundMurdererWins)
 		winner:SetTextColor(Color(190, 20, 20))
 	end
 
@@ -53,7 +53,7 @@ function GM:DisplayEndRoundBoard(data)
 
 	if data.murdererName then
 		local col = data.murdererColor
-		local msgs = Translator:AdvVarTranslate(translate.endroundMurdererWas, {
+		local msgs = Translator:AdvVarTranslate(Translator:Client(LocalPlayer()).endroundMurdererWas, {
 			murderer = {text = data.murdererName, color = Color(col.x * 255, col.y * 255, col.z * 255)}
 		})
 
@@ -80,7 +80,7 @@ function GM:DisplayEndRoundBoard(data)
 	desc:Dock(TOP)
 	desc:SetFont("MersRadial")
 	desc:SetAutoStretchVertical(true)
-	desc:SetText(translate.endroundLootCollected)
+	desc:SetText(Translator:Client(LocalPlayer()).endroundLootCollected)
 	desc:SetTextColor(color_white)
 	
 	local lootList = vgui.Create("DPanelList", lootPnl)
@@ -157,9 +157,9 @@ function GM:DisplayEndRoundBoard(data)
 		surface.SetTextColor(255, 255, 255, 255)
 
 		surface.SetFont("MersRadialSmall")
-		local tw, th = surface.GetTextSize(translate.adText)
+		local tw, th = surface.GetTextSize(Translator:Client(LocalPlayer()).adText)
 		surface.SetTextPos(4, h / 2 - th / 2)
-		surface.DrawText(translate.adText)
+		surface.DrawText(Translator:Client(LocalPlayer()).adText)
 	end
 
 end

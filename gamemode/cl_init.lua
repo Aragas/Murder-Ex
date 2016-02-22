@@ -17,6 +17,7 @@ include("cl_spectate.lua")
 include("cl_adminpanel.lua")
 include("cl_flashlight.lua")
 
+GM.ClientLanguage = CreateClientConVar("mu_client_language", "en", true, true)
 GM.Debug = CreateClientConVar( "mu_debug", 0, true, true )
 GM.HaloRender = CreateClientConVar( "mu_halo_render", 1, true, true ) // should we render halos
 GM.HaloRenderLoot = CreateClientConVar( "mu_halo_loot", 1, true, true ) // shouuld we render loot halos
@@ -24,6 +25,17 @@ GM.HaloRenderKnife = CreateClientConVar( "mu_halo_knife", 1, true, true ) // sho
 
 function GM:Initialize() 
 	self:FootStepsInit()
+	
+	http.Fetch( "http://geoip.nekudo.com/api",
+		function( body, len, headers, code )
+			local table = util.JSONToTable(body)
+			self.ClientLanguage = string.lower(table.country.code)
+		end,
+		
+		function( error )
+			self.ClientLanguage = "en"
+		end
+ )
 end
 
 GM.FogEmitters = {}

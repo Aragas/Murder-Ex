@@ -67,7 +67,7 @@ function GM:HUDPaint()
 	local client = LocalPlayer()
 
 	if round == 0 then
-		drawTextShadow(translate.minimumPlayers, "MersRadial", ScrW() / 2, ScrH() - 10, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
+		drawTextShadow(Translator:Client(LocalPlayer()).minimumPlayers, "MersRadial", ScrW() / 2, ScrH() - 10, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
 	end
 
 	if client:Team() == 2 then
@@ -124,7 +124,7 @@ function GM:HUDPaint()
 	// 2 round ended, about to restart
 	// 4 waiting for map switch
 	if(self.RoundStage == 1)then
-		draw.SimpleTextOutlined(translate.roundEnds..time, "ROUND_TIMER_Display", ScrW()/2, 20, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
+		draw.SimpleTextOutlined(Translator:Client(LocalPlayer()).roundEnds..time, "ROUND_TIMER_Display", ScrW()/2, 20, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
 		-- draw.SimpleTextOutlined("Тест: "..TimeLeft, "ROUND_TIMER_Display", ScrW()/2, 40, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
 		-- draw.SimpleTextOutlined("Тест_1: "..time12, "ROUND_TIMER_Display", ScrW()/2, 60, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
 		-- draw.SimpleTextOutlined("Тест_2: "..time13, "ROUND_TIMER_Display", ScrW()/2, 80, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
@@ -135,14 +135,14 @@ end
 
 function GM:DrawStartRoundInformation()
 	local client = LocalPlayer()
-	local t1 = translate.startHelpBystanderTitle
+	local t1 = Translator:Client(LocalPlayer()).startHelpBystanderTitle
 	local t2 = nil
 	local c = Color(20,120,255)
-	local desc = translate.table.startHelpBystander
+	local desc = Translator:Client(LocalPlayer()).startHelpBystander
 
 	if self:GetAmMurderer() then
-		t1 = translate.startHelpMurdererTitle
-		desc = translate.table.startHelpMurderer
+		t1 = Translator:Client(LocalPlayer()).startHelpMurdererTitle
+		desc = Translator:Client(LocalPlayer()).startHelpMurderer
 		c = Color(190, 20, 20)
 	end
 
@@ -154,9 +154,9 @@ function GM:DrawStartRoundInformation()
 		end
 	end
 	if hasMagnum then
-		t1 = translate.startHelpGunTitle
-		t2 = translate.startHelpGunSubtitle
-		desc = translate.table.startHelpGun
+		t1 = Translator:Client(LocalPlayer()).startHelpGunTitle
+		t2 = Translator:Client(LocalPlayer()).startHelpGunSubtitle
+		desc = Translator:Client(LocalPlayer()).startHelpGun
 	end
 	
 	local hasMedkit = false
@@ -167,9 +167,9 @@ function GM:DrawStartRoundInformation()
 		end
 	end
 	if hasMedkit then
-		t1 = translate.startHelpMedkitTitle
-		t2 = translate.startHelpMedkitSubtitle
-		desc = translate.table.startHelpMedkit
+		t1 = Translator:Client(LocalPlayer()).startHelpMedkitTitle
+		t2 = Translator:Client(LocalPlayer()).startHelpMedkitSubtitle
+		desc = Translator:Client(LocalPlayer()).startHelpMedkit
 	end
 	
 	local hasMetalDetector = false
@@ -180,9 +180,9 @@ function GM:DrawStartRoundInformation()
 		end
 	end
 	if hasMetalDetector then
-		t1 = translate.startHelpMetalDetectorTitle
-		t2 = translate.startHelpMetalDetectorSubtitle
-		desc = translate.table.startHelpMetalDetector
+		t1 = Translator:Client(LocalPlayer()).startHelpMetalDetectorTitle
+		t2 = Translator:Client(LocalPlayer()).startHelpMetalDetectorSubtitle
+		desc = Translator:Client(LocalPlayer()).startHelpMetalDetector
 	end
 
 	drawTextShadow(t1, "MersRadial", ScrW() / 2, ScrH()  * 0.25, c, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -223,8 +223,8 @@ function GM:DrawGameHUD(ply)
 			surface.SetDrawColor(10,10,10,50)
 			surface.DrawRect(-1, -1, ScrW() + 2, ScrH() + 2)
 		
-			drawTextShadow(translate.murdererFog, "MersRadial", ScrW() * 0.5, ScrH() - 80, Color(90,20,20), 1, TEXT_ALIGN_CENTER)
-			drawTextShadow(translate.murdererFogSub, "MersRadialSmall", ScrW() * 0.5, ScrH() - 50, Color(130,130,130), 1, TEXT_ALIGN_CENTER)
+			drawTextShadow(Translator:Client(LocalPlayer()).murdererFog, "MersRadial", ScrW() * 0.5, ScrH() - 80, Color(90,20,20), 1, TEXT_ALIGN_CENTER)
+			drawTextShadow(Translator:Client(LocalPlayer()).murdererFogSub, "MersRadialSmall", ScrW() * 0.5, ScrH() - 50, Color(130,130,130), 1, TEXT_ALIGN_CENTER)
 		end
 	end
 
@@ -264,17 +264,17 @@ function GM:DrawGameHUD(ply)
 
 					local text
 					if but:GetDelay() < 0 then
-						text = translate.ttt_tbut_single
+						text = Translator:Client(LocalPlayer()).ttt_tbut_single
 					elseif but:GetDelay() == 0 then
-						text = translate.ttt_tbut_reuse
+						text = Translator:Client(LocalPlayer()).ttt_tbut_reuse
 					else
-						text = Translator:VarTranslate(translate.ttt_tbut_retime, {num = but:GetDelay()})
+						text = Translator:VarTranslate(Translator:Client(LocalPlayer()).ttt_tbut_retime, {num = but:GetDelay()})
 					end
 					drawTextShadow(text, "MersText1", sp.x, sp.y + fh, col, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 					
 					local key = input.LookupBinding("use")
 					if key then
-						text = Translator:VarTranslate(translate.ttt_tbut_help, {key = key:upper()})
+						text = Translator:VarTranslate(Translator:Client(LocalPlayer()).ttt_tbut_help, {key = key:upper()})
 						drawTextShadow(text, "MersText1", sp.x, sp.y + ft + fh, col, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 					end
 				end
@@ -304,7 +304,7 @@ function GM:DrawGameHUD(ply)
 			if IsValid(tr.Entity) && tr.Entity:GetClass() == "prop_ragdoll" && tr.HitPos:Distance(tr.StartPos) < 80 then
 				if tr.Entity:GetBystanderName() != ply:GetBystanderName() || colorDif(tr.Entity:GetPlayerColor(), ply:GetPlayerColor()) > 0.1 then 
 					local h = draw.GetFontHeight("MersRadial")
-					drawTextShadow(translate.pressEToDisguiseFor1Loot, "MersRadialSmall", ScrW() / 2, ScrH() / 2 + 80 + h * 0.7, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+					drawTextShadow(Translator:Client(LocalPlayer()).pressEToDisguiseFor1Loot, "MersRadialSmall", ScrW() / 2, ScrH() / 2 + 80 + h * 0.7, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 				end
 			end
 		end
@@ -372,11 +372,11 @@ function GM:DrawGameHUD(ply)
 	
 	local shouldDraw = hook.Run("HUDShouldDraw", "MurderPlayerType")
 	if shouldDraw != false then
-		local name = translate.bystander
+		local name = Translator:Client(LocalPlayer()).bystander
 		local color = Color(20,120,255)
 
 		if LocalPlayer() == ply && self:GetAmMurderer() then
-			name = translate.murderer
+			name = Translator:Client(LocalPlayer()).murderer
 			color = Color(190, 20, 20)
 		end
 

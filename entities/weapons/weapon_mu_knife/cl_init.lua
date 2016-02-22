@@ -1,5 +1,7 @@
 include("shared.lua")
 
+SWEP.PrintName 		= "Knife"
+
 SWEP.DrawAmmo 		= false
 SWEP.DrawCrosshair 	= true
 
@@ -14,7 +16,7 @@ function SWEP:DrawWeaponSelection( x, y, w, h, alpha )
 end
 
 function SWEP:Initialize()
-	self.PrintName = translate and translate.knife or "Knife"
+	self.PrintName = Translator:Client(self.Owner) and Translator:Client(self.Owner).knife or "Knife"
 end
 
 function SWEP:Deploy()

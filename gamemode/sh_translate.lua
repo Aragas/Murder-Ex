@@ -1,10 +1,123 @@
+if SERVER then
+	util.AddNetworkString("mu_chatmsg")
+	util.AddNetworkString("mu_dochatmsg")
+	
+	net.Receive("mu_dochatmsg", function(len, pl)
+		local pairCount = net.ReadDouble()
+		local args = { }
+		
+		for i = 1, pairCount do
+			table.insert(args, net.ReadTable())
+			table.insert(args, net.ReadString())
+		end
+		
+		PrintTable(args)
+		
+		Translator:ClientPrint(pairCount, unpack(args))
+	end)
+end
+if CLIENT then
+	net.Receive("mu_chatmsg", function(len, pl)
+		local args = { }
+	
+		local pairCount = net.ReadDouble()
+		local lang = Translator:Client(LocalPlayer())
+		
+		for i = 1, pairCount do
+			table.insert(args, net.ReadTable())
+			table.insert(args, FilterString(lang, net.ReadString()))
+		end
+	
+		chat.AddText(unpack(args))
+	end)
+	
+	// TODO there should be a better way
+	function FilterString(lang, str)
+	
+		if str == "translate.sayMurderer" then
+			return lang.sayMurderer
+		end
+
+		if str == "translate.saySuspect" then
+			return lang.saySuspect
+		end
+
+		if str == "translate.saySee" then
+			return lang.saySee
+		end
+
+		if str == "translate.sayDeath" then
+			return lang.sayDeath
+		end
+	
+		if str == "translate.hasSomething" then
+			return lang.hasSomething
+		end
+	
+		if str == "translate.hasNothing" then
+			return lang.hasNothing
+		end
+	
+		return str
+	end
+end
+
 // translate
 
 Translator = {}
 Translator.languages = {}
-Translator.language = "english"
+Translator.language = "en"
 
 local rootFolder = (GM or GAMEMODE).Folder:sub(11) .. "/gamemode/"
+
+function Translator:Client(client)
+	if client and client:IsPlayer() and self.languages[client:GetInfo("mu_client_language")] then
+		return self.languages[client:GetInfo("mu_client_language")]
+	else
+		return self.languages["en"]
+	end
+end
+function Translator:ClientLang(client)
+	if client and client:IsPlayer() and client:GetInfo("mu_client_language") then
+		return client:GetInfo("mu_client_language")
+	else
+		return en
+	end
+end
+function Translator:ClientPrint(pairCount, ...)
+	local args = { ... }
+
+	if CLIENT then
+		net.Start("mu_dochatmsg")
+		net.WriteDouble(pairCount)
+		
+		for l, arg in pairs(args) do
+			if istable(arg) then
+				net.WriteTable(arg)
+			elseif isstring(arg) then
+				net.WriteString(arg)
+			end
+		end
+		
+		net.SendToServer()
+	end
+	if SERVER then
+		for k, ply in pairs(player.GetAll()) do
+			net.Start("mu_chatmsg")
+			net.WriteDouble(pairCount)
+		
+			for l, arg in pairs(args) do
+				if istable(arg) then
+					net.WriteTable(arg)
+				elseif isstring(arg) then
+					net.WriteString(arg)
+				end
+			end
+			
+			net.Send(ply)
+		end
+	end
+end
 
 function Translator:LoadLanguage(name, overridePath)
 	local tempG = {}
@@ -28,7 +141,7 @@ function Translator:LoadLanguage(name, overridePath)
 end
 
 function Translator:GetLanguage()
-	return self.language or "english"
+	return self.language or "en"
 end
 
 local def = {}
@@ -37,15 +150,15 @@ function Translator:GetLanguageTable()
 	if self.languages[lang] then
 		return self.languages[lang]
 	end
-	if self.languages["english"] then
-		return self.languages["english"]
+	if self.languages["en"] then
+		return self.languages["en"]
 	end
 	return def
 end
 
 function Translator:GetEnglishTable()
-	if self.languages["english"] then
-		return self.languages["english"]
+	if self.languages["en"] then
+		return self.languages["en"]
 	end
 	return def
 end
@@ -75,7 +188,7 @@ if SERVER then
 	hook.Add("Think", "Translator", function ()
 		local lang = GAMEMODE.Language:GetString()
 
-		if lang == "" then lang = "english" end
+		if lang == "" then lang = "en" end
 
 		if lang != Translator.language then
 			Translator:ChangeLanguage(lang)

@@ -1,6 +1,6 @@
 include("shared.lua")
 
-SWEP.PrintName 		= translate and translate.magnum or "Magnum"
+SWEP.PrintName 		= "Magnum"
 
 SWEP.DrawAmmo 		= false
 SWEP.DrawCrosshair 	= true
@@ -14,7 +14,7 @@ function SWEP:DrawWeaponSelection( x, y, w, h, alpha )
 end
 
 function SWEP:Initialize()
-	self.PrintName = translate and translate.magnum or "Magnum"
+	self.PrintName = Translator:Client(self.Owner) and Translator:Client(self.Owner).magnum or "Magnum"
 end
 
 function SWEP:DrawWorldModel()	

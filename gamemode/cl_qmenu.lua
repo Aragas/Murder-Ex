@@ -79,40 +79,40 @@ function GM:RadialMousePressed(code, vec)
 					sname = splayer:GetBystanderName()
 				
 					if ments[selected].Code == "murderer" then
-						chat.AddText(
+						Translator:ClientPrint(5,
 							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
 							Color(255,255,255), ": ",
 							Color(scolor.x, scolor.y, scolor.z), sname,
 							Color(255,255,255), " ",
-							Color(255,255,255), translate.sayMurderer)
+							Color(255,255,255), "translate.sayMurderer")
 					end
 				
 					if ments[selected].Code == "suspect" then
-						chat.AddText(
+						Translator:ClientPrint(5,
 							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
 							Color(255,255,255), ": ",
 							Color(scolor.x, scolor.y, scolor.z), sname,
 							Color(255,255,255), " ",
-							Color(255,255,255), translate.saySuspect)
+							Color(255,255,255), "translate.saySuspect")
 					end
 				
 					if ments[selected].Code == "isee" then
-						chat.AddText(
+						Translator:ClientPrint(6,
 							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
 							Color(255,255,255), ": ",
-							Color(255,255,255), translate.saySee,
+							Color(255,255,255), "translate.saySee",
 							Color(255,255,255), " ",
 							Color(scolor.x, scolor.y, scolor.z), sname,
 							Color(255,255,255), "!")
 					end
 				
 					if ments[selected].Code == "death" then
-						chat.AddText(
+						Translator:ClientPrint(5,
 							Color(lcolor.x, lcolor.y, lcolor.z), lplayer:GetBystanderName(),
 							Color(255,255,255), ": ",
 							Color(scolor.x, scolor.y, scolor.z), sname,
 							Color(255,255,255), " ",
-							Color(255,255,255), translate.sayDeath)
+							Color(255,255,255), "translate.sayDeath")
 					end
 				end		
 			end
@@ -235,8 +235,8 @@ function GM:DrawRadialMenu()
 				textCol = color_white
 			end
 
-			drawShadow(translate["voice" .. ment.TransCode], "MersRadial", sx + w * 0.6 * x, sy + h * 0.6 * y - fontHeight / 3,textCol, 1)
-			drawShadow(translate["voice" .. ment.TransCode .. "Description"], "MersRadialSmall", sx + w * 0.6 * x, sy + h * 0.6 * y + fontHeight / 2, textCol, 1)
+			drawShadow(Translator:Client(LocalPlayer())["voice" .. ment.TransCode], "MersRadial", sx + w * 0.6 * x, sy + h * 0.6 * y - fontHeight / 3,textCol, 1)
+			drawShadow(Translator:Client(LocalPlayer())["voice" .. ment.TransCode .. "Description"], "MersRadialSmall", sx + w * 0.6 * x, sy + h * 0.6 * y + fontHeight / 2, textCol, 1)
 
 		end
 	end

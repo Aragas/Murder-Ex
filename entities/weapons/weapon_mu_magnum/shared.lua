@@ -34,8 +34,13 @@ SWEP.Secondary.Automatic   	= false
 SWEP.Secondary.Ammo         = "none"
 SWEP.Secondary.Sound		= ""
 
+function SWEP:Initialize()
+	self:SetCanAttack(true)
+end
+
 function SWEP:SetupDataTables()
 	self:NetworkVar("Bool", 0, "CanAttack")
+	self:SetCanAttack(true)
 end
 
 function SWEP:PrimaryAttack()

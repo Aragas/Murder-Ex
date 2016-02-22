@@ -1,6 +1,6 @@
 include("shared.lua")
 
-SWEP.PrintName		= translate and translate.hands or "Hands"
+SWEP.PrintName		= "Hands"
 
 SWEP.DrawAmmo 		= false
 SWEP.DrawCrosshair 	= false
@@ -14,7 +14,7 @@ function SWEP:DrawWeaponSelection( x, y, w, h, alpha )
 end
 
 function SWEP:Initialize()
-	self.PrintName = translate and translate.hands or "Hands"
+	self.PrintName = Translator:Client(self.Owner) and Translator:Client(self.Owner).hands or "Hands"
 end
 
 function SWEP:DrawWorldModel()
