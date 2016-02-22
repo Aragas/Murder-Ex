@@ -49,7 +49,8 @@ function SWEP:PrimaryAttack()
 	
 	self:HasNothing() 
 	self.LastReloadTime = CurTime()
-	return
+	
+	hook.Run("MUMetalDetector", self.Owner) -- Hook for revarding
 end
 
 function SWEP:Deploy()

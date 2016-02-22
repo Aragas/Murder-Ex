@@ -252,6 +252,7 @@ function GM:EndTheRound(reason, murderer)
 	self.MurdererLastKill = nil
 
 	hook.Call("OnEndRound")
+	hook.Run("MUEndRound", reason) -- Hook for revarding
 	self.RoundCount = self.RoundCount + 1
 	local limit = self.RoundLimit:GetInt()
 	if limit > 0 then
