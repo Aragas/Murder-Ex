@@ -1,6 +1,8 @@
 local lplayer
 local splayer
 
+local lastUse
+
 local ments
 
 local radialOpen = false
@@ -67,6 +69,13 @@ end
 
 function GM:RadialMousePressed(code, vec)
 	if radialOpen then
+		if(lastUse and lastUse + self.QMenuDelay:GetFloat() > CurTime()) then
+			self:CloseRadialMenu()
+			return
+		else
+			lastUse = CurTime()
+		end
+		
 		local selected = getSelected()
 		if selected && selected > 0 && code == MOUSE_LEFT then
 			if selected && ments[selected] then
