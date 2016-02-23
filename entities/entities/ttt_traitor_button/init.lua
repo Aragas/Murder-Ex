@@ -47,7 +47,7 @@ function ENT:KeyValue(key, value)
 	elseif key == "RemoveOnPress" then
 		self.RemoveOnPress = tobool(value)
 	else
-		// this is a terrible idea, but don't know if it does something important in TTT
+		// this is a terrible idea, but I don't know if it does something important in TTT
 		self:SetNetworkKeyValue(key, value)
 	end
 end

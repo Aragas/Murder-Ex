@@ -39,7 +39,7 @@ function SWEP:PrimaryAttack()
 
 	for k,v in pairs(trace.Entity:GetWeapons()) do
 		if v:IsValid() then
-			if v:GetClass() ~= "weapon_rp_hands" then  -- don't count Hands
+			if v:GetClass() ~= "weapon_mu_hands" then  -- don't count Hands
 				self:HasSomething()
 				self.LastReloadTime = CurTime()
 				return
