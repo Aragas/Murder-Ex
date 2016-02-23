@@ -1,5 +1,5 @@
 GM.Name 	= "Murder-Ex"
-GM.Author 	= "MechanicalMind and Contributors"
+GM.Author 	= "MechanicalMind, Aragas(Pinkie Arg) and Contributors"
 // credits to Minty Fresh for some styling on the scoreboard
 // credits to Waddlesworth for the logo and menu icon
 GM.Email 	= ""
