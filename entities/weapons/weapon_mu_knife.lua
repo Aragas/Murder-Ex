@@ -78,7 +78,7 @@ SWEP.Primary.DefaultClip = -1
 SWEP.Primary.Automatic = true
 SWEP.Primary.Ammo = "none"
 
-SWEP.PrintName = Translator:Client(self.Owner) and Translator:Client(self.Owner).knife or "Knife"
+SWEP.PrintName = "Knife"
 function SWEP:Initialize()
 	self.PrintName = Translator:Client(self.Owner) and Translator:Client(self.Owner).knife or "Knife"
 	self.BaseClass.Initialize(self)

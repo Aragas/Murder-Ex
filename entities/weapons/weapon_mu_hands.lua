@@ -20,7 +20,7 @@ SWEP.HoldType = "normal"
 SWEP.SequenceDraw = "fists_draw"
 SWEP.SequenceIdle = "fists_idle_01"
 
-SWEP.PrintName = Translator:Client(self.Owner) and Translator:Client(self.Owner).hands or "Hands"
+SWEP.PrintName = "Hands"
 function SWEP:Initialize()
 	self.PrintName = Translator:Client(self.Owner) and Translator:Client(self.Owner).hands or "Hands"
 	self.BaseClass.Initialize(self)

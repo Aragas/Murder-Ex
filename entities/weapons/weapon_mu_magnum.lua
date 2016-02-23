@@ -38,7 +38,7 @@ SWEP.Primary.AutoReload = true
 SWEP.ReloadSequence = "reload"
 SWEP.ReloadSound = Sound("Weapon_357.Reload")
 
-SWEP.PrintName = Translator:Client(self.Owner) and Translator:Client(self.Owner).magnum or "Magnum"
+SWEP.PrintName = "Magnum"
 function SWEP:Initialize()
 	self.BaseClass.Initialize(self)
 	self.PrintName = Translator:Client(self.Owner) and Translator:Client(self.Owner).magnum or "Magnum"
