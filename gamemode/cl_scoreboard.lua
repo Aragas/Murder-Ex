@@ -270,7 +270,7 @@ function GM:ScoreboardShow()
 			self:SetSize(w,h)
 		end
 
-		local lab = Label("by "..GM.Author.." version " .. tostring(GAMEMODE.Version or "error"), menu.Credits)
+		local lab = Label("By "..self.Author..". Version "..tostring(GAMEMODE.Version or "error"), menu.Credits)
 		lab:Dock(RIGHT)
 		lab:SetFont("MersText1")
 		lab.PerformLayout = name.PerformLayout
