@@ -337,15 +337,6 @@ function GM:PlayerDeath(ply, Inflictor, attacker )
 	net.Start("mu_death")
 	net.WriteUInt(4, 4)
 	net.Send(ply)
-	
-	if ( Inflictor && Inflictor == attacker && (Inflictor:IsPlayer() || Inflictor:IsNPC()) ) then
-	
-		Inflictor = Inflictor:GetActiveWeapon()
-		if ( !Inflictor || Inflictor == NULL ) then Inflictor = attacker end
-	
-	end
-
-	self:RagdollSetDeathDetails(ply, Inflictor, attacker)
 end
 
 function GM:PlayerDeathThink(ply)
