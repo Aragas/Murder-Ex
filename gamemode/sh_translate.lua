@@ -11,8 +11,6 @@ if SERVER then
 			table.insert(args, net.ReadString())
 		end
 		
-		PrintTable(args)
-		
 		Translator:ClientPrint(pairCount, unpack(args))
 	end)
 end
@@ -32,6 +30,9 @@ if CLIENT then
 	
 	// TODO there should be a better way
 	function FilterString(lang, str)
+		if(not lang) then 
+			lang = Translator:Client(nil)
+		end
 	
 		if str == "translate.sayMurderer" then
 			return lang.sayMurderer
